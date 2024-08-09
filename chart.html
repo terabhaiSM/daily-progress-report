@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>John Doe's Performance Charts</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: #f4f4f4;
+        margin: 0;
+      }
+      h2 {
+        margin-bottom: 20px;
+      }
+      .chart-container {
+        width: 80%;
+        max-width: 800px;
+      }
+      .chart {
+        position: relative;
+        height: 400px;
+        width: 100%;
+      }
+      table {
+        width: 80%;
+        max-width: 800px;
+        border-collapse: collapse;
+        margin-bottom: 50px;
+      }
+      table,
+      th,
+      td {
+        border: 1px solid #ddd;
+      }
+      th,
+      td {
+        padding: 10px;
+        text-align: center;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>MCQ Accuracy Over Time - John Doe</h2>
+    <div class="chart-container">
+      <canvas id="accuracyChart" class="chart"></canvas>
+    </div>
+
+    <h2>MCQ Attempted Over Time - John Doe</h2>
+    <div class="chart-container">
+      <canvas id="attemptedChart" class="chart"></canvas>
+    </div>
+
+    <h2>Subject-wise Practice - John Doe</h2>
+    <div
+      id="subjectPracticeTable"
+      style="
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+      "
+    ></div>
+
+    <h2>Tests Attempted - John Doe</h2>
+    <div
+      id="testsAttemptedTable"
+      style="
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+      "
+    ></div>
+
+    <script>
+      // Function to fetch and parse JSON data
+      async function fetchData() {
+        const response = await fetch("data.json"); // Ensure that 'data.json' is in the same directory
+        const data = await response.json();
+        return data;
+      }
+
+      // Function to extract data for John Doe
+      function extractData(data) {
+        const accuracyData = [];
+        const attemptedData = [];
+        const labels = [];
+
+        // Find John Doe's data in MCQ Accuracy
+        const mcqAccuracy = data["MCQ Accuracy"].find(
+          (item) => item["Student Name"] === "John Doe"
+        );
+        const mcqAttempted = data["MCQ attempted"].find(
+          (item) => item["Student Name"] === "John Doe"
+        );
+
+        if (mcqAccuracy && mcqAttempted) {
+          for (const date in mcqAccuracy) {
+            if (date !== "Phone Number" && date !== "Student Name") {
+              labels.push(date);
+              accuracyData.push(mcqAccuracy[date]);
+              attemptedData.push(mcqAttempted[date]);
+            }
+          }
+        }
+
+        return { labels, accuracyData, attemptedData };
+      }
+
+      function extractTestData(data) {
+        const tests = data.Tests.filter(
+          (item) => item["Student Name"] === "John Doe"
+        );
+
+        return tests.map((test) => {
+          return {
+            testName: test["Test Name"],
+            marks: test["Marks Achieved"],
+            subjectsInvolved: test["Subjects"]
+              ? test["Subjects"].join(", ")
+              : "-",
+            accuracy: (test.Accuracy * 100).toFixed(0) + "%",
+          };
+        });
+      }
+
+      function getAccuracyColor(accuracy) {
+        accuracy = parseInt(accuracy); // Convert accuracy to integer
+        if (accuracy >= 80) {
+          return "#54DF9C"; // Green
+        } else if (accuracy >= 70) {
+          return "#B4EB4E"; // Light Green
+        } else if (accuracy >= 60) {
+          return "#ffe975"; // Yellow
+        } else if (accuracy >= 35) {
+          return "#ffa666"; // Orange
+        } else {
+          return "#ff6767"; // Red
+        }
+      }
+
+      function renderTestsTable(testData) {
+        const tableContainer = document.getElementById("testsAttemptedTable");
+
+        // Create table element
+        const table = document.createElement("table");
+
+        // Create table headers
+        const headers = ["Test", "Subjects Involved", "Marks", "Accuracy"];
+        const thead = document.createElement("thead");
+        const headerRow = document.createElement("tr");
+
+        headers.forEach((headerText) => {
+          const th = document.createElement("th");
+          th.appendChild(document.createTextNode(headerText));
+          th.style.backgroundColor = "#FFFDD0"; // Cream color for header
+          headerRow.appendChild(th);
+        });
+
+        thead.appendChild(headerRow);
+        table.appendChild(thead);
+
+        // Create table body
+        const tbody = document.createElement("tbody");
+
+        testData.forEach((test) => {
+          const row = document.createElement("tr");
+
+          const cells = [
+            test.testName,
+            test.subjectsInvolved,
+            test.marks,
+            `${test.accuracy}%`,
+          ];
+
+          cells.forEach((cellText, index) => {
+            const td = document.createElement("td");
+            td.appendChild(document.createTextNode(cellText));
+
+            // Apply conditional color for accuracy column (index 3)
+            if (index === 3) {
+              td.style.backgroundColor = getAccuracyColor(cellText);
+            }
+
+            row.appendChild(td);
+          });
+
+          tbody.appendChild(row);
+        });
+
+        table.appendChild(tbody);
+        tableContainer.appendChild(table);
+      }
+      // Function to extract subject-wise practice data for John Doe
+      function extractSubjectData(data) {
+        const subjects = data.Subjects.filter(
+          (item) => item["Student Name"] === "John Doe"
+        );
+
+        return subjects.map((subject) => {
+          return {
+            subject: subject.Subject,
+            mcqsPractised:
+              subject["MCQ Attempted"] !== "-" ? subject["MCQ Attempted"] : "-",
+            mcqMarks: subject["MCQ Marks"] !== "-" ? subject["MCQ Marks"] : "-",
+            mcqAccuracy:
+              subject["MCQ Accuracy"] !== "-"
+                ? (subject["MCQ Accuracy"] * 100).toFixed(0) + "%"
+                : "0%",
+            mainsEvaluated:
+              subject["Mains Qn Attempted"] !== "-"
+                ? subject["Mains Qn Attempted"]
+                : "-",
+            mainsMarks:
+              subject["Mains Marks"] !== "-" ? subject["Mains Marks"] : "-",
+          };
+        });
+      }
+
+      // Function to render the charts
+      function renderCharts(labels, accuracyData, attemptedData) {
+        // MCQ Accuracy Chart
+        const accuracyCtx = document
+          .getElementById("accuracyChart")
+          .getContext("2d");
+        const accuracyChart = new Chart(accuracyCtx, {
+          type: "bar",
+          data: {
+            labels: labels,
+            datasets: [
+              {
+                label: "MCQ Accuracy (%)",
+                data: accuracyData,
+                backgroundColor: "rgba(54, 162, 235, 0.7)",
+                borderColor: "rgba(54, 162, 235, 1)",
+                borderWidth: 1,
+              },
+            ],
+          },
+          options: {
+            scales: {
+              x: {
+                title: {
+                  display: true,
+                  text: "Date",
+                },
+              },
+              y: {
+                beginAtZero: true,
+                max: 100,
+                title: {
+                  display: true,
+                  text: "MCQ Accuracy (%)",
+                },
+                ticks: {
+                  callback: function (value) {
+                    return value + "%";
+                  },
+                },
+              },
+            },
+            plugins: {
+              legend: {
+                display: false,
+              },
+              tooltip: {
+                callbacks: {
+                  label: function (tooltipItem) {
+                    return tooltipItem.raw + "%";
+                  },
+                },
+              },
+            },
+            responsive: true,
+            maintainAspectRatio: false,
+            barPercentage: 0.6,
+            layout: {
+              padding: {
+                top: 20,
+                bottom: 20,
+              },
+            },
+          },
+        });
+
+        // MCQ Attempted Chart
+        const attemptedCtx = document
+          .getElementById("attemptedChart")
+          .getContext("2d");
+        const attemptedChart = new Chart(attemptedCtx, {
+          type: "bar",
+          data: {
+            labels: labels,
+            datasets: [
+              {
+                label: "MCQ Attempted",
+                data: attemptedData,
+                backgroundColor: "rgba(255, 99, 132, 0.7)",
+                borderColor: "rgba(255, 99, 132, 1)",
+                borderWidth: 1,
+              },
+            ],
+          },
+          options: {
+            scales: {
+              x: {
+                title: {
+                  display: true,
+                  text: "Date",
+                },
+              },
+              y: {
+                beginAtZero: true,
+                title: {
+                  display: true,
+                  text: "MCQ Attempted",
+                },
+              },
+            },
+            plugins: {
+              legend: {
+                display: false,
+              },
+            },
+            responsive: true,
+            maintainAspectRatio: false,
+            barPercentage: 0.6,
+            layout: {
+              padding: {
+                top: 20,
+                bottom: 20,
+              },
+            },
+          },
+        });
+      }
+
+      // Function to render the subject-wise practice table
+      function renderSubjectTable(subjectData) {
+        const tableContainer = document.getElementById("subjectPracticeTable");
+
+        // Create table element
+        const table = document.createElement("table");
+
+        // Create table headers
+        const headers = [
+          "Subject",
+          "MCQs Practised",
+          "MCQ Marks",
+          "MCQ Accuracy",
+          "Mains Evaluated",
+          "Mains Marks",
+        ];
+        const thead = document.createElement("thead");
+        const headerRow = document.createElement("tr");
+
+        headers.forEach((headerText) => {
+          const th = document.createElement("th");
+          th.appendChild(document.createTextNode(headerText));
+          th.style.backgroundColor = "#FFFDD0";
+          headerRow.appendChild(th);
+        });
+
+        thead.appendChild(headerRow);
+        table.appendChild(thead);
+
+        // Create table body
+        const tbody = document.createElement("tbody");
+
+        subjectData.forEach((subject) => {
+          const row = document.createElement("tr");
+
+          const cells = [
+            subject.subject,
+            subject.mcqsPractised,
+            subject.mcqMarks,
+            subject.mcqAccuracy,
+            subject.mainsEvaluated,
+            subject.mainsMarks,
+          ];
+
+          cells.forEach((cellText, index) => {
+            const td = document.createElement("td");
+            td.appendChild(document.createTextNode(cellText));
+            if (index === 3) {
+              td.style.backgroundColor = getAccuracyColor(cellText);
+            }
+            row.appendChild(td);
+          });
+
+          tbody.appendChild(row);
+        });
+
+        table.appendChild(tbody);
+        tableContainer.appendChild(table);
+      }
+
+      // Main function to execute the script
+      async function main() {
+        const data = await fetchData();
+        const { labels, accuracyData, attemptedData } = extractData(data);
+        renderCharts(labels, accuracyData, attemptedData);
+
+        const subjectData = extractSubjectData(data);
+        renderSubjectTable(subjectData);
+
+        const testData = extractTestData(data);
+        renderTestsTable(testData);
+      }
+
+      main(); // Run the script
+    </script>
+  </body>
+</html>

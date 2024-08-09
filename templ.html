@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weekly Progress Report</title>
+    <style>
+        body {
+            font-family: 'Nunito Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            font-size: 14px;
+        }
+        .container {
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            font-size: 24px;
+            color: #4472C4;
+        }
+        .header img {
+            width: 150px;
+            margin-bottom: 10px;
+        }
+        .overview {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .overview .box {
+            width: 30%;
+            padding: 10px;
+            background-color: #F9F9F9;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .overview .box h2 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        .overview .box p {
+            font-size: 16px;
+            margin: 0;
+        }
+        .discipline-chart, .subject-chart {
+            margin-bottom: 30px;
+        }
+        .chart-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .subject-table, .test-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        .subject-table th, .subject-table td, .test-table th, .test-table td {
+            padding: 10px;
+            border: 1px solid #DDD;
+            text-align: left;
+        }
+        .subject-table th, .test-table th {
+            background-color: #F0F0F0;
+        }
+        .subject-table .mcq-accuracy,
+        .test-table .accuracy {
+            text-align: center;
+        }
+        .subject-table .mcq-accuracy.red {
+            background-color: #FFCDD2;
+        }
+        .subject-table .mcq-accuracy.yellow {
+            background-color: #FFF9C4;
+        }
+        .subject-table .mcq-accuracy.green,
+        .test-table .accuracy.green {
+            background-color: #C8E6C9;
+        }
+        .pro-tip {
+            padding: 10px;
+            background-color: #FFF3E0;
+            border-left: 4px solid #FFA726;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="SuperKalamLogo.png" alt="SuperKalam">
+            <h1>Weekly Progress Report</h1>
+            <p>29 July - 4 Aug 2024</p>
+        </div>
+        
+        <div class="overview">
+            <div class="box">
+                <h2>MCQ Marks</h2>
+                <p>83/100</p>
+            </div>
+            <div class="box">
+                <h2>MCQ Accuracy</h2>
+                <p>88%</p>
+            </div>
+            <div class="box">
+                <h2>Mains Marks</h2>
+                <p>74/100</p>
+            </div>
+        </div>
+        
+        <div class="discipline-chart">
+            <h3 class="chart-title">Daily Discipline</h3>
+            <!-- Placeholder for Daily MCQ Attempted chart -->
+            <img src="./daily-mcq-attempted-chart.png" alt="Daily MCQ Attempted">
+            <!-- Placeholder for Daily MCQ Accuracy chart -->
+            <img src="daily-mcq-accuracy-chart.png" alt="Daily MCQ Accuracy">
+        </div>
+        
+        <h3 class="chart-title">Subject-wise Practice</h3>
+        <table class="subject-table">
+            <thead>
+                <tr>
+                    <th>Subject</th>
+                    <th>MCQ Marks</th>
+                    <th>MCQ Attempted</th>
+                    <th>MCQ Accuracy</th>
+                    <th>Mains Marks</th>
+                    <th>Mains Qn Attempted</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Geography</td>
+                    <td>88/100</td>
+                    <td>95</td>
+                    <td class="mcq-accuracy green">93%</td>
+                    <td>80/125</td>
+                    <td>8</td>
+                </tr>
+                <tr>
+                    <td>Environment</td>
+                    <td>75/100</td>
+                    <td>90</td>
+                    <td class="mcq-accuracy green">83%</td>
+                    <td>72/100</td>
+                    <td>9</td>
+                </tr>
+                <tr>
+                    <td>Polity</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td class="mcq-accuracy red">0%</td>
+                    <td>84/95</td>
+                    <td>10</td>
+                </tr>
+                <tr>
+                    <td>History</td>
+                    <td>45/95</td>
+                    <td>100</td>
+                    <td class="mcq-accuracy yellow">50%</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>Polity</td>
+                    <td>85/95</td>
+                    <td>100</td>
+                    <td class="mcq-accuracy green">75%</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3 class="chart-title">Tests Attempted</h3>
+        <table class="test-table">
+            <thead>
+                <tr>
+                    <th>Test Name</th>
+                    <th>Subjects</th>
+                    <th>Marks</th>
+                    <th>Accuracy</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>AIPT</td>
+                    <td>Polity, History</td>
+                    <td>85/100</td>
+                    <td class="accuracy green">80%</td>
+                </tr>
+                <tr>
+                    <td>AIPT 2</td>
+                    <td>Science & Technology</td>
+                    <td>20/100</td>
+                    <td class="accuracy red">25%</td>
+                </tr>
+                <tr>
+                    <td>AIPT4</td>
+                    <td>Health Care</td>
+                    <td>75/100</td>
+                    <td class="accuracy green">85%</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="pro-tip">
+            <p>💡 Pro Tip: Periodically assess your progress and adjust your study plan accordingly. Identify and work on weak areas.</p>
+        </div>
+    </div>
+</body>
+</html>

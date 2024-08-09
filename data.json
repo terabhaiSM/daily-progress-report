@@ -1,0 +1,222 @@
+{
+    "Overview":[
+     {
+      "Phone Number": 9876543456,
+      "Student Name": "John Doe",
+      "MCQ Accuracy": 0.82,
+      "MCQ Marks": "82\/100",
+      "Mains Marks": "73\/100"
+     },
+     {
+      "Phone Number": 8876543211,
+      "Student Name": "Priya Singh",
+      "MCQ Accuracy": 0.88,
+      "MCQ Marks": "83\/100",
+      "Mains Marks": "74\/100"
+     },
+     {
+      "Phone Number": 9876543212,
+      "Student Name": "Rohit Sharma",
+      "MCQ Accuracy": 0.92,
+      "MCQ Marks": "90\/100",
+      "Mains Marks": "80\/100"
+     }
+    ],
+    "Subjects":[
+     {
+      "Phone Number": 9876543456,
+      "Student Name": "John Doe",
+      "Subject": "Math",
+      "MCQ Marks": "80\/100",
+      "MCQ Attempted": 100,
+      "MCQ Accuracy": 0.2,
+      "Mains Marks": "70\/80",
+      "Mains Qn Attempted": 10
+     },
+     {
+      "Phone Number": 9876543456,
+      "Student Name": "John Doe",
+      "Subject": "Science",
+      "MCQ Marks": "85\/100",
+      "MCQ Attempted": 100,
+      "MCQ Accuracy": 0.85,
+      "Mains Marks": "75\/90",
+      "Mains Qn Attempted": 12
+     },
+     {
+      "Phone Number": 8876543211,
+      "Student Name": "Priya Singh",
+      "Subject": "History",
+      "MCQ Marks": "78\/90",
+      "MCQ Attempted": 90,
+      "MCQ Accuracy": 0.49,
+      "Mains Marks": "68\/100",
+      "Mains Qn Attempted": 11
+     },
+     {
+      "Phone Number": 8876543211,
+      "Student Name": "Priya Singh",
+      "Subject": "Geography",
+      "MCQ Marks": "88\/100",
+      "MCQ Attempted": 100,
+      "MCQ Accuracy": 0.88,
+      "Mains Marks": "80\/85",
+      "Mains Qn Attempted": 14
+     },
+     {
+      "Phone Number": 9876543212,
+      "Student Name": "Rohit Sharma",
+      "Subject": "Polity",
+      "MCQ Marks": "-",
+      "MCQ Attempted": "-",
+      "MCQ Accuracy": "-",
+      "Mains Marks": "85\/90",
+      "Mains Qn Attempted": 16
+     },
+     {
+      "Phone Number": 9876543212,
+      "Student Name": "Rohit Sharma",
+      "Subject": "Technology",
+      "MCQ Marks": "89\/95",
+      "MCQ Attempted": 95,
+      "MCQ Accuracy": 0.72,
+      "Mains Marks": "82\/95",
+      "Mains Qn Attempted": 15
+     },
+     {
+      "Phone Number": 9876543212,
+      "Student Name": "Rohit Sharma",
+      "Subject": "Biology",
+      "MCQ Marks": "91\/100",
+      "MCQ Attempted": 100,
+      "MCQ Accuracy": 0.91,
+      "Mains Marks": "84\/90",
+      "Mains Qn Attempted": 17
+     }
+    ],
+    "Tests":[
+     {
+      "Phone Number": 9876543456,
+      "Student Name": "John Doe",
+      "Test Name": "aipt",
+      "Marks Achieved": "85\/100",
+      "Accuracy": 0.78
+     },
+     {
+      "Phone Number": 9876543456,
+      "Student Name": "John Doe",
+      "Subjects": ["Science", "Geography"],
+      "Test Name": "aipt2",
+      "Marks Achieved": "92\/100",
+      "Accuracy": 0.84
+     },
+     {
+      "Phone Number": 8876543211,
+      "Student Name": "Priya Singh",
+      "Subjects": ["Biology", "Technology"],
+      "Test Name": "aipt",
+      "Marks Achieved": "81\/100",
+      "Accuracy": 0.82
+     },
+     {
+      "Phone Number": 8876543211,
+      "Student Name": "Priya Singh",
+      "Subjects": ["Math", "Geography"],
+      "Test Name": "aipt3",
+      "Marks Achieved": "79\/90",
+      "Accuracy": 0.79
+     },
+     {
+      "Phone Number": 9876543212,
+      "Student Name": "Rohit Sharma",
+      "Subjects": ["Math", "Science"],
+      "Test Name": "aipt",
+      "Marks Achieved": "90\/100",
+      "Accuracy": 0.9
+     },
+     {
+      "Phone Number": 9876543212,
+      "Student Name": "Rohit Sharma",
+      "Test Name": "aipt2",
+      "Marks Achieved": "87\/95",
+      "Accuracy": 0.88
+     },
+     {
+      "Phone Number": 9876543212,
+      "Student Name": "Rohit Sharma",
+      "Test Name": "aipt3",
+      "Marks Achieved": "93\/100",
+      "Accuracy": 0.91
+     }
+    ],
+    "MCQ attempted":[
+     {
+      "Phone Number": 9876543456,
+      "Student Name": "John Doe",
+      "29th Jul 2024": 20,
+      "30th Jul 2024": 25,
+      "31st Jul 2024": 15,
+      "1st Aug 2024": 30,
+      "2nd Aug 2024": 22,
+      "3rd Aug 2024": 28,
+      "4th Aug 2024": 18
+     },
+     {
+      "Phone Number": 8876543211,
+      "Student Name": "Priya Singh",
+      "29th Jul 2024": 18,
+      "30th Jul 2024": 22,
+      "31st Jul 2024": 19,
+      "1st Aug 2024": 25,
+      "2nd Aug 2024": 21,
+      "3rd Aug 2024": 20,
+      "4th Aug 2024": 23
+     },
+     {
+      "Phone Number": 9876543212,
+      "Student Name": "Rohit Sharma",
+      "29th Jul 2024": 25,
+      "30th Jul 2024": 20,
+      "31st Jul 2024": 27,
+      "1st Aug 2024": 30,
+      "2nd Aug 2024": 24,
+      "3rd Aug 2024": 29,
+      "4th Aug 2024": 22
+     }
+    ],
+    "MCQ Accuracy":[
+     {
+      "Phone Number": 9876543456,
+      "Student Name": "John Doe",
+      "29th Jul 2024": 75,
+      "30th Jul 2024": 60,
+      "31st Jul 2024": 82,
+      "1st Aug 2024": 68,
+      "2nd Aug 2024": 79,
+      "3rd Aug 2024": 91,
+      "4th Aug 2024": 87
+     },
+     {
+      "Phone Number": 8876543211,
+      "Student Name": "Priya Singh",
+      "29th Jul 2024": 80,
+      "30th Jul 2024": 72,
+      "31st Jul 2024": 65,
+      "1st Aug 2024": 78,
+      "2nd Aug 2024": 81,
+      "3rd Aug 2024": 77,
+      "4th Aug 2024": 84
+     },
+     {
+      "Phone Number": 9876543212,
+      "Student Name": "Rohit Sharma",
+      "29th Jul 2024": 83,
+      "30th Jul 2024": 70,
+      "31st Jul 2024": 85,
+      "1st Aug 2024": 74,
+      "2nd Aug 2024": 88,
+      "3rd Aug 2024": 92,
+      "4th Aug 2024": 89
+     }
+    ]
+    }
