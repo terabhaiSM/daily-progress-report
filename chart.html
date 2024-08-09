@@ -49,6 +49,17 @@
     </style>
   </head>
   <body>
+    <h2>Overview - John Doe</h2>
+    <div
+      id="overviewTable"
+      style="
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+      "
+    ></div>
+
     <h2>MCQ Accuracy Over Time - John Doe</h2>
     <div class="chart-container">
       <canvas id="accuracyChart" class="chart"></canvas>
@@ -129,6 +140,25 @@
               ? test["Subjects"].join(", ")
               : "-",
             accuracy: (test.Accuracy * 100).toFixed(0) + "%",
+          };
+        });
+      }
+
+      // Function to extract overview data for John Doe
+      function extractOverviewData(data) {
+        // Filter the Overview data for John Doe
+        const overview = data.Overview.filter(
+          (item) => item["Student Name"] === "John Doe"
+        );
+
+        // Map the overview data to a format suitable for the table
+        return overview.map((item) => {
+          return {
+            phoneNumber: item["Phone Number"],
+            studentName: item["Student Name"],
+            mcqAccuracy: (item["MCQ Accuracy"] * 100).toFixed(0) + "%", // Convert to percentage
+            mcqMarks: item["MCQ Marks"],
+            mainsMarks: item["Mains Marks"],
           };
         });
       }
@@ -344,7 +374,63 @@
         });
       }
 
-      // Function to render the subject-wise practice table
+      // Function to render the overview table
+      function renderOverviewTable(data) {
+        console.log(data);
+        const overviewTable = document.getElementById("overviewTable");
+        const table = document.createElement("table");
+
+        // Create table headers
+        const headers = [
+          "Phone Number",
+          "Student Name",
+          "MCQ Accuracy",
+          "MCQ Marks",
+          "Mains Marks",
+        ];
+        const thead = document.createElement("thead");
+        const headerRow = document.createElement("tr");
+
+        headers.forEach((headerText) => {
+          const th = document.createElement("th");
+          th.appendChild(document.createTextNode(headerText));
+          th.style.backgroundColor = "#FFFDD0"; // Light grey color for header
+          headerRow.appendChild(th);
+        });
+
+        thead.appendChild(headerRow);
+        table.appendChild(thead);
+
+        // Create table body
+        const tbody = document.createElement("tbody");
+
+        data.forEach((item) => {
+          const row = document.createElement("tr");
+
+          const cells = [
+            item["phoneNumber"],
+            item["studentName"],
+            item["mcqAccuracy"],
+            item["mcqMarks"],
+            item["mainsMarks"],
+          ];
+
+          cells.forEach((cellText, index) => {
+            const td = document.createElement("td");
+            td.appendChild(document.createTextNode(cellText));
+            if (index === 3) {
+              td.style.backgroundColor = getAccuracyColor(cellText);
+            }
+            row.appendChild(td);
+          });
+
+          tbody.appendChild(row);
+        });
+
+        table.appendChild(tbody);
+        overviewTable.appendChild(table);
+      }
+
       function renderSubjectTable(subjectData) {
         const tableContainer = document.getElementById("subjectPracticeTable");
 
@@ -408,6 +494,8 @@
       async function main() {
         const data = await fetchData();
         const { labels, accuracyData, attemptedData } = extractData(data);
+        const overviewData = extractOverviewData(data);
+        renderOverviewTable(overviewData);
         renderCharts(labels, accuracyData, attemptedData);
 
         const subjectData = extractSubjectData(data);
