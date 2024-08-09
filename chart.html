@@ -7,7 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
       body {
-        font-family: Arial, sans-serif;
+        font-family: 'Helvetica Neue', sans-serif;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -46,19 +46,44 @@
       th {
         background-color: #f2f2f2;
       }
+      .report-header {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      .report-header h1 {
+        font-size: 24px;
+        color: black;
+        margin: 0;
+      }
+      .report-header p {
+        margin: 5px 0;
+      }
+      .date {
+        font-size: 14px;
+        color: darkgrey;
+      }
+      .para {
+        font-size: 14px;
+        color: rgb(0, 0, 0);
+      }
+      .user-details {
+        font-size: 12px;
+        color: darkgrey;
+      }
     </style>
   </head>
   <body>
-    <h2>Overview - John Doe</h2>
-    <div
-      id="overviewTable"
-      style="
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-      "
-    ></div>
+    <div class="report-header">
+      <h1>Weekly Progress Report</h1>
+      <p class="date">29 July - 4 Aug 2024</p>
+      <p id="userDetails" class="user-details"></p>
+    </div>
+
+    <div class="report-header">
+        <h1>Daily Discipline</h1>
+        <p class="para">In UPSC preparation, consistency is the key. Daily discipline is based on your learning and its implementation in practising MCQs.
+        </p>
+      </div>
 
     <h2>MCQ Accuracy Over Time - John Doe</h2>
     <div class="chart-container">
@@ -84,6 +109,17 @@
     <h2>Tests Attempted - John Doe</h2>
     <div
       id="testsAttemptedTable"
+      style="
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+      "
+    ></div>
+
+    <h2>Overview</h2>
+    <div
+      id="overviewTable"
       style="
         display: flex;
         align-items: center;
@@ -490,6 +526,20 @@
         tableContainer.appendChild(table);
       }
 
+      function setUserDetails(data) {
+        const userDetailsElement = document.getElementById("userDetails");
+
+        // Extract John Doe's details
+        const user = data["Overview"].find(
+          (item) => item["Student Name"] === "John Doe"
+        );
+
+        if (user) {
+          userDetailsElement.textContent = `${user["Student Name"]} | ${user["Phone Number"]}`;
+        } else {
+          userDetailsElement.textContent = "John Doe | 9803223248";
+        }
+      }
       // Main function to execute the script
       async function main() {
         const data = await fetchData();
@@ -500,6 +550,7 @@
 
         const subjectData = extractSubjectData(data);
         renderSubjectTable(subjectData);
+        setUserDetails(data);
 
         const testData = extractTestData(data);
         renderTestsTable(testData);
