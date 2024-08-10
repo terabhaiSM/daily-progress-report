@@ -6,21 +6,28 @@
     <title>John Doe's Performance Charts</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
+      @font-face {
+        font-family: "Helvetica Neue";
+        src: url("NunitoSans-VariableFont_YTLC,opsz,wdth,wght.ttf")
+          format("ttf");
+        font-weight: lighter;
+        font-style: normal;
+      }
       body {
-        font-family: 'Helvetica Neue', sans-serif;
+        font-family: "Helvetica Neue";
         display: flex;
         flex-direction: column;
-        align-items: center;
-        justify-content: center;
+        margin-left: 60px;
+        width: 90%;
         background-color: #f4f4f4;
-        margin: 0;
       }
       h2 {
         margin-bottom: 20px;
       }
       .chart-container {
-        width: 80%;
+        width: 86%;
         max-width: 800px;
+        height: 300px;
       }
       .chart {
         position: relative;
@@ -31,7 +38,7 @@
         width: 80%;
         max-width: 800px;
         border-collapse: collapse;
-        margin-bottom: 50px;
+        margin-bottom: 30px;
       }
       table,
       th,
@@ -41,13 +48,11 @@
       th,
       td {
         padding: 10px;
-        text-align: center;
       }
       th {
         background-color: #f2f2f2;
       }
       .report-header {
-        text-align: center;
         margin-bottom: 20px;
       }
       .report-header h1 {
@@ -73,65 +78,79 @@
     </style>
   </head>
   <body>
-    <div class="report-header">
-      <h1>Weekly Progress Report</h1>
+    <div style="text-align: center;margin-bottom: 40px;width: 100%;margin-left: -30px;margin-top: 40px;" bis_skin_checked="1">
+        <a href="https://superkalam.com" target="_blank">
+            <img src="./images/image5.png" alt="Image Description" style="width: 130px;height: auto;">
+        </a>
+    </div>    
+    <div class="report-header" style="margin-left: 0">
+      <h1 style="margin-left: 0; font-weight: normal; margin-bottom: 10px">
+        Weekly Progress Report
+      </h1>
       <p class="date">29 July - 4 Aug 2024</p>
       <p id="userDetails" class="user-details"></p>
     </div>
 
-    <div class="report-header">
-        <h1>Daily Discipline</h1>
-        <p class="para">In UPSC preparation, consistency is the key. Daily discipline is based on your learning and its implementation in practising MCQs.
-        </p>
-      </div>
+    <h2 style="margin-top: 0; font-size: 16px; margin-bottom: 10px">
+      Overview
+    </h2>
+    <div
+      id="overviewTable"
+      style="display: flex; align-items: left; width: 108%; margin-bottom: 20px;"
+    ></div>
 
-    <h2>MCQ Accuracy Over Time - John Doe</h2>
-    <div class="chart-container">
-      <canvas id="accuracyChart" class="chart"></canvas>
+    <div class="report-header" style="margin-left: 0; margin-bottom: 0">
+      <h1 style="font-size: 16px; margin-bottom: 10px">Daily Discipline</h1>
+      <p class="para" style="margin-left: 0; margin-right: 70px; margin-bottom: 20px;">
+        In UPSC preparation, consistency is the key. Daily discipline is based
+        on your learning and its implementation in practising MCQs.
+      </p>
     </div>
 
-    <h2>MCQ Attempted Over Time - John Doe</h2>
+    <p
+      style="
+        margin-left: 10px;
+        font-weight: 400;
+        color: #6f6f6f;
+        margin-bottom: 0px;
+      "
+    >
+      MCQ Practice (all subjects)
+    </p>
     <div class="chart-container">
       <canvas id="attemptedChart" class="chart"></canvas>
     </div>
 
-    <h2>Subject-wise Practice - John Doe</h2>
+    <p
+      style="
+        margin-left: 10px;
+        font-weight: 400;
+        color: #6f6f6f;
+        margin-bottom: 0px;
+      "
+    >
+      MCQ Accuracy (all subjects)
+    </p>
+    <div class="chart-container">
+      <canvas id="accuracyChart" class="chart"></canvas>
+    </div>
+
+    <h2 style="font-size: 16px; margin-top: 0">Subject-wise Practice</h2>
     <div
       id="subjectPracticeTable"
-      style="
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-      "
+      style="display: flex; align-items: left; width: 108%"
     ></div>
 
-    <h2>Tests Attempted - John Doe</h2>
+    <h2 style="font-size: 16px; margin-top: 0">Tests Attempted</h2>
     <div
       id="testsAttemptedTable"
-      style="
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-      "
+      style="display: flex; align-items: left; width: 100%"
     ></div>
-
-    <h2>Overview</h2>
-    <div
-      id="overviewTable"
-      style="
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-      "
-    ></div>
-
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
     <script>
       // Function to fetch and parse JSON data
       async function fetchData() {
-        const response = await fetch("data.json"); // Ensure that 'data.json' is in the same directory
+        const response = await fetch('http://localhost:3000/data.json'); // Ensure that 'data.json' is in the same directory
         const data = await response.json();
         return data;
       }
@@ -228,7 +247,12 @@
         headers.forEach((headerText) => {
           const th = document.createElement("th");
           th.appendChild(document.createTextNode(headerText));
-          th.style.backgroundColor = "#FFFDD0"; // Cream color for header
+          th.style.backgroundColor = "#f3ecc7";
+          th.style.color = "#8d6f17";
+          th.style.fontWeight = "normal";
+          th.style.fontSize = "12px";
+          th.style.textAlign = "left";
+          th.style.width = "15%";
           headerRow.appendChild(th);
         });
 
@@ -245,18 +269,38 @@
             test.testName,
             test.subjectsInvolved,
             test.marks,
-            `${test.accuracy}%`,
+            test.accuracy,
           ];
-
           cells.forEach((cellText, index) => {
             const td = document.createElement("td");
-            td.appendChild(document.createTextNode(cellText));
+            const span = document.createElement("span"); // Create a span inside the td
 
-            // Apply conditional color for accuracy column (index 3)
-            if (index === 3) {
-              td.style.backgroundColor = getAccuracyColor(cellText);
+            if (index === 2) {
+              // Split the marks into two parts
+              const [marks, totalMarks] = cellText.split("/");
+
+              const marksSpan = document.createElement("span");
+              marksSpan.textContent = marks;
+              marksSpan.style.fontSize = "14px";
+              marksSpan.style.fontWeight = "bold";
+
+              const totalMarksSpan = document.createElement("span");
+              totalMarksSpan.textContent = "/" + totalMarks;
+              totalMarksSpan.style.fontSize = "12px"; // Set font size for total marks
+
+              span.appendChild(marksSpan);
+              span.appendChild(totalMarksSpan);
+            } else {
+              span.appendChild(document.createTextNode(cellText));
             }
 
+            if (index === 3) {
+              span.style.backgroundColor = getAccuracyColor(cellText); // Apply background color to the span
+            }
+
+            td.appendChild(span);
+            td.style.fontSize = "12px";
+            td.style.whiteSpace = "nowrap";
             row.appendChild(td);
           });
 
@@ -266,7 +310,7 @@
         table.appendChild(tbody);
         tableContainer.appendChild(table);
       }
-      // Function to extract subject-wise practice data for John Doe
+
       function extractSubjectData(data) {
         const subjects = data.Subjects.filter(
           (item) => item["Student Name"] === "John Doe"
@@ -294,6 +338,71 @@
 
       // Function to render the charts
       function renderCharts(labels, accuracyData, attemptedData) {
+        // MCQ Attempted Chart
+        const attemptedCtx = document
+          .getElementById("attemptedChart")
+          .getContext("2d");
+        const attemptedChart = new Chart(attemptedCtx, {
+          type: "bar",
+          data: {
+            labels: labels,
+            datasets: [
+              {
+                label: "MCQ Attempted",
+                data: attemptedData,
+                backgroundColor: "#189c5c",
+                borderColor: "rgba(255, 99, 132, 1)",
+                borderWidth: 1,
+              },
+            ],
+          },
+          options: {
+            scales: {
+              x: {
+                grid: {
+                  display: false, // Remove vertical grid lines
+                },
+                title: {
+                  display: true,
+                  text: "Date",
+                },
+              },
+              y: {
+                beginAtZero: true,
+                title: {
+                  display: true,
+                  text: "MCQ Attempted",
+                },
+                grid: {
+                  display: true, // Keep horizontal grid lines
+                },
+              },
+            },
+            plugins: {
+              legend: {
+                display: false,
+              },
+              datalabels: {
+                color: "black",
+                align: "start",
+                anchor: "end",
+                formatter: function (value) {
+                  return value;
+                },
+              },
+            },
+            responsive: true,
+            maintainAspectRatio: false,
+            barPercentage: 0.6,
+            layout: {
+              padding: {
+                top: 20,
+                bottom: 20,
+              },
+            },
+          },
+        });
+
         // MCQ Accuracy Chart
         const accuracyCtx = document
           .getElementById("accuracyChart")
@@ -306,7 +415,7 @@
               {
                 label: "MCQ Accuracy (%)",
                 data: accuracyData,
-                backgroundColor: "rgba(54, 162, 235, 0.7)",
+                backgroundColor: "#1878ff",
                 borderColor: "rgba(54, 162, 235, 1)",
                 borderWidth: 1,
               },
@@ -315,6 +424,9 @@
           options: {
             scales: {
               x: {
+                grid: {
+                  display: false, // Remove vertical grid lines
+                },
                 title: {
                   display: true,
                   text: "Date",
@@ -332,6 +444,9 @@
                     return value + "%";
                   },
                 },
+                grid: {
+                  display: true, // Keep horizontal grid lines
+                },
               },
             },
             plugins: {
@@ -345,56 +460,13 @@
                   },
                 },
               },
-            },
-            responsive: true,
-            maintainAspectRatio: false,
-            barPercentage: 0.6,
-            layout: {
-              padding: {
-                top: 20,
-                bottom: 20,
-              },
-            },
-          },
-        });
-
-        // MCQ Attempted Chart
-        const attemptedCtx = document
-          .getElementById("attemptedChart")
-          .getContext("2d");
-        const attemptedChart = new Chart(attemptedCtx, {
-          type: "bar",
-          data: {
-            labels: labels,
-            datasets: [
-              {
-                label: "MCQ Attempted",
-                data: attemptedData,
-                backgroundColor: "rgba(255, 99, 132, 0.7)",
-                borderColor: "rgba(255, 99, 132, 1)",
-                borderWidth: 1,
-              },
-            ],
-          },
-          options: {
-            scales: {
-              x: {
-                title: {
-                  display: true,
-                  text: "Date",
+              datalabels: {
+                color: "white",
+                align: "end",
+                anchor: "end",
+                formatter: function (value) {
+                  return value + "%";
                 },
-              },
-              y: {
-                beginAtZero: true,
-                title: {
-                  display: true,
-                  text: "MCQ Attempted",
-                },
-              },
-            },
-            plugins: {
-              legend: {
-                display: false,
               },
             },
             responsive: true,
@@ -417,20 +489,19 @@
         const table = document.createElement("table");
 
         // Create table headers
-        const headers = [
-          "Phone Number",
-          "Student Name",
-          "MCQ Accuracy",
-          "MCQ Marks",
-          "Mains Marks",
-        ];
+        const headers = [ "MCQ Marks", "MCQ Accuracy", "Mains Marks"];
         const thead = document.createElement("thead");
         const headerRow = document.createElement("tr");
 
         headers.forEach((headerText) => {
           const th = document.createElement("th");
           th.appendChild(document.createTextNode(headerText));
-          th.style.backgroundColor = "#FFFDD0"; // Light grey color for header
+          th.style.backgroundColor = "#f3ecc7";
+          th.style.color = "#8d6f17";
+          th.style.fontWeight = "normal";
+          th.style.fontSize = "12px";
+          th.style.textAlign = "left";
+          th.style.width = "15%";
           headerRow.appendChild(th);
         });
 
@@ -444,19 +515,41 @@
           const row = document.createElement("tr");
 
           const cells = [
-            item["phoneNumber"],
-            item["studentName"],
-            item["mcqAccuracy"],
             item["mcqMarks"],
+            item["mcqAccuracy"],
             item["mainsMarks"],
           ];
 
           cells.forEach((cellText, index) => {
             const td = document.createElement("td");
-            td.appendChild(document.createTextNode(cellText));
-            if (index === 3) {
-              td.style.backgroundColor = getAccuracyColor(cellText);
+            const span = document.createElement("span"); // Create a span inside the td
+
+            if (index === 0 || index === 2) {
+              // Split the marks into two parts
+              const [marks, totalMarks] = cellText.split("/");
+
+              const marksSpan = document.createElement("span");
+              marksSpan.textContent = marks;
+              marksSpan.style.fontSize = "14px";
+              marksSpan.style.fontWeight = "bold";
+
+              const totalMarksSpan = document.createElement("span");
+              totalMarksSpan.textContent = "/" + totalMarks;
+              totalMarksSpan.style.fontSize = "12px"; // Set font size for total marks
+
+              span.appendChild(marksSpan);
+              span.appendChild(totalMarksSpan);
+            } else {
+              span.appendChild(document.createTextNode(cellText));
             }
+
+            if (index === 1) {
+              span.style.backgroundColor = getAccuracyColor(cellText); // Apply background color to the span
+            }
+
+            td.appendChild(span);
+            td.style.fontSize = "12px";
+            td.style.whiteSpace = "nowrap";
             row.appendChild(td);
           });
 
@@ -488,7 +581,12 @@
         headers.forEach((headerText) => {
           const th = document.createElement("th");
           th.appendChild(document.createTextNode(headerText));
-          th.style.backgroundColor = "#FFFDD0";
+          th.style.backgroundColor = "#f3ecc7";
+          th.style.color = "#8d6f17";
+          th.style.fontWeight = "normal";
+          th.style.fontSize = "12px";
+          th.style.textAlign = "left";
+          th.style.width = "15%";
           headerRow.appendChild(th);
         });
 
@@ -512,10 +610,34 @@
 
           cells.forEach((cellText, index) => {
             const td = document.createElement("td");
-            td.appendChild(document.createTextNode(cellText));
-            if (index === 3) {
-              td.style.backgroundColor = getAccuracyColor(cellText);
+            const span = document.createElement("span"); // Create a span inside the td
+
+            if (index === 2 || index === 5) {
+              // Split the marks into two parts
+              const [marks, totalMarks] = cellText.split("/");
+
+              const marksSpan = document.createElement("span");
+              marksSpan.textContent = marks;
+              marksSpan.style.fontSize = "14px";
+              marksSpan.style.fontWeight = "bold";
+
+              const totalMarksSpan = document.createElement("span");
+              totalMarksSpan.textContent = "/" + totalMarks;
+              totalMarksSpan.style.fontSize = "12px"; // Set font size for total marks
+
+              span.appendChild(marksSpan);
+              span.appendChild(totalMarksSpan);
+            } else {
+              span.appendChild(document.createTextNode(cellText));
             }
+
+            if (index === 3) {
+              span.style.backgroundColor = getAccuracyColor(cellText); // Apply background color to the span
+            }
+
+            td.appendChild(span);
+            td.style.fontSize = "12px";
+            td.style.whiteSpace = "nowrap";
             row.appendChild(td);
           });
 
@@ -556,7 +678,7 @@
         renderTestsTable(testData);
       }
 
-      main(); // Run the script
+      window.onload = main; // Run the script
     </script>
   </body>
 </html>

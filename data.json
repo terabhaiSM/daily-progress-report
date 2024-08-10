@@ -153,70 +153,70 @@
      {
       "Phone Number": 9876543456,
       "Student Name": "John Doe",
-      "29th Jul 2024": 20,
-      "30th Jul 2024": 25,
-      "31st Jul 2024": 15,
-      "1st Aug 2024": 30,
-      "2nd Aug 2024": 22,
-      "3rd Aug 2024": 28,
-      "4th Aug 2024": 18
+      "29 Jul'24": 20,
+      "30 Jul'24": 25,
+      "31 Jul'24": 15,
+      "1 Aug'24": 30,
+      "2 Aug'24": 24,
+      "3 Aug'24": 29,
+      "4 Aug'24": 22
      },
      {
       "Phone Number": 8876543211,
       "Student Name": "Priya Singh",
-      "29th Jul 2024": 18,
-      "30th Jul 2024": 22,
-      "31st Jul 2024": 19,
-      "1st Aug 2024": 25,
-      "2nd Aug 2024": 21,
-      "3rd Aug 2024": 20,
-      "4th Aug 2024": 23
+      "29 Jul'24": 20,
+      "30 Jul'24": 25,
+      "31 Jul'24": 15,
+      "1 Aug'24": 30,
+      "2 Aug'24": 24,
+      "3 Aug'24": 29,
+      "4 Aug'24": 22
      },
      {
       "Phone Number": 9876543212,
       "Student Name": "Rohit Sharma",
-      "29th Jul 2024": 25,
-      "30th Jul 2024": 20,
-      "31st Jul 2024": 27,
-      "1st Aug 2024": 30,
-      "2nd Aug 2024": 24,
-      "3rd Aug 2024": 29,
-      "4th Aug 2024": 22
+      "29 Jul'24": 20,
+      "30 Jul'24": 25,
+      "31 Jul'24": 15,
+      "1 Aug'24": 30,
+      "2 Aug'24": 24,
+      "3 Aug'24": 29,
+      "4 Aug'24": 22
      }
     ],
     "MCQ Accuracy":[
      {
       "Phone Number": 9876543456,
       "Student Name": "John Doe",
-      "29th Jul 2024": 75,
-      "30th Jul 2024": 60,
-      "31st Jul 2024": 82,
-      "1st Aug 2024": 68,
-      "2nd Aug 2024": 79,
-      "3rd Aug 2024": 91,
-      "4th Aug 2024": 87
+      "29 Jul'24": 75,
+      "30 Jul'24": 60,
+      "31 Jul'24": 65,
+      "1 Aug'24": 80,
+      "2 Aug'24": 72,
+      "3 Aug'24": 77,
+      "4 Aug'24": 84
      },
      {
       "Phone Number": 8876543211,
       "Student Name": "Priya Singh",
-      "29th Jul 2024": 80,
-      "30th Jul 2024": 72,
-      "31st Jul 2024": 65,
-      "1st Aug 2024": 78,
-      "2nd Aug 2024": 81,
-      "3rd Aug 2024": 77,
-      "4th Aug 2024": 84
+      "29 Jul'24": 75,
+      "30 Jul'24": 60,
+      "31 Jul'24": 65,
+      "1 Aug'24": 80,
+      "2 Aug'24": 72,
+      "3 Aug'24": 77,
+      "4 Aug'24": 84
      },
      {
       "Phone Number": 9876543212,
       "Student Name": "Rohit Sharma",
-      "29th Jul 2024": 83,
-      "30th Jul 2024": 70,
-      "31st Jul 2024": 85,
-      "1st Aug 2024": 74,
-      "2nd Aug 2024": 88,
-      "3rd Aug 2024": 92,
-      "4th Aug 2024": 89
+      "29 Jul'24": 75,
+      "30 Jul'24": 60,
+      "31 Jul'24": 65,
+      "1 Aug'24": 80,
+      "2 Aug'24": 72,
+      "3 Aug'24": 77,
+      "4 Aug'24": 84
      }
     ]
     }

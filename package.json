@@ -9,8 +9,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
     "fontkit": "^2.0.2",
     "fs": "^0.0.1-security",
+    "html-pdf-chrome": "^0.8.4",
     "node-fetch": "^3.3.2",
     "pdf-lib": "^1.17.1",
     "puppeteer": "^23.0.2",
